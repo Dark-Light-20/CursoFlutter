@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 
 class CounterPage extends StatefulWidget {
-  const CounterPage({super.key});
+  final int initialValue;
+
+  const CounterPage({super.key, this.initialValue = 0});
 
   @override
-  State<StatefulWidget> createState() {
+  State<CounterPage> createState() {
     return _CounterPageState();
   }
 }
 
-class _CounterPageState extends State {
-  int counter = 0;
+class _CounterPageState extends State<CounterPage> {
+  late int counter;
+
+  @override
+  void initState() {
+    super.initState();
+    counter = widget.initialValue;
+  }
 
   @override
   Widget build(BuildContext context) {

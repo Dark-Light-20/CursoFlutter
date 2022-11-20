@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const CounterPage(initialValue: 10),
-      home: const TimerPage(),
+      home: const HomePage(),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:didupdatewidget/pages/timer/timer_page.dart';
+import 'package:didupdatewidget/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Timer Demo - didupdatewidget',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

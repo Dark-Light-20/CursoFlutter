@@ -22,7 +22,26 @@ class SwiperContainer extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.5,
-      child: Swiper(itemCount: characters.length),
+      child: Swiper(
+        itemCount: characters.length,
+        layout: SwiperLayout.STACK,
+        itemWidth: size.width * 0.77,
+        itemHeight: size.height * 0.42,
+        itemBuilder: (context, index) {
+          final Character character = characters[index];
+          return GestureDetector(
+            onTap: () => {},
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(character.image),
+                fit: BoxFit.fill,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

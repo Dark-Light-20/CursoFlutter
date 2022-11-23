@@ -23,7 +23,7 @@ class CharactersProvider extends ChangeNotifier {
   getCharacters() async {
     final jsonData = await _getJsonData("/api/character");
     final charactersResponse = CharactersResponse.fromJson(jsonData);
-    characters.addAll(charactersResponse.characters);
+    characters = charactersResponse.characters;
     // notify to widgets that are listening with new data and re render
     notifyListeners();
   }

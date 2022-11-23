@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       initialRoute: "home",
       routes: {
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         "detail": (context) => const CharacterDetailPage(),
       },
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );

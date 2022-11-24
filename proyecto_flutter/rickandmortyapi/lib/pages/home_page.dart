@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rickandmortyapi/provider/characters_provider.dart';
-import 'package:rickandmortyapi/widget/swiper_container.dart';
+import 'package:rickandmortyapi/widget/widgets.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,7 +22,12 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            SwiperContainer(characters: getCharacterProvider.characters)
+            SwiperContainer(characters: getCharacterProvider.characters),
+            CharacterSlider(
+              characters: getCharacterProvider.nextCharacters,
+              title: "Personajes",
+              onNextPage: () => getCharacterProvider.getNextCharacters(),
+            )
           ],
         )));
   }

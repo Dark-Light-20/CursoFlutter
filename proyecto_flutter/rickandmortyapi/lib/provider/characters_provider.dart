@@ -7,10 +7,12 @@ import 'package:rickandmortyapi/models/characters_response.model.dart';
 class CharactersProvider extends ChangeNotifier {
   final String _baseUrl = "rickandmortyapi.com";
   List<Character> characters = [];
+  List<Character> nextCharacters = [];
   int _page = 0;
 
   CharactersProvider() {
     getCharacters();
+    getNextCharacters();
   }
 
   Future<String> _getJsonData(String segmentUrl, [int page = 1]) async {
@@ -25,6 +27,14 @@ class CharactersProvider extends ChangeNotifier {
     final charactersResponse = CharactersResponse.fromJson(jsonData);
     characters = charactersResponse.characters;
     // notify to widgets that are listening with new data and re render
+    notifyListeners();
+  }
+
+  getNextCharacters() async {
+    _page++;
+    final jsonData = await _getJsonData('/api/character', _page);
+    final responseNextCharacters = CharactersResponse.fromJson(jsonData);
+    nextCharacters = [...nextCharacters, ...responseNextCharacters.characters];
     notifyListeners();
   }
 }

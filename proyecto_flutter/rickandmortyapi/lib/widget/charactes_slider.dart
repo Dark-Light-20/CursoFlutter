@@ -45,6 +45,7 @@ class _CharacterSliderState extends State<CharacterSlider> {
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold)),
             ),
+          const SizedBox(height: 10),
           Expanded(
               child: ListView.builder(
             controller: scrollController,
@@ -72,7 +73,8 @@ class _CharacterPoster extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(children: [
         GestureDetector(
-          onTap: () => {},
+          onTap: () =>
+              Navigator.pushNamed(context, "detail", arguments: character),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
@@ -84,7 +86,13 @@ class _CharacterPoster extends StatelessWidget {
             ),
           ),
         ),
-        Text(character.name)
+        const SizedBox(height: 5),
+        Text(
+          character.name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+        )
       ]),
     );
   }

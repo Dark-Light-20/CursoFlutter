@@ -30,7 +30,8 @@ class SwiperContainer extends StatelessWidget {
         itemBuilder: (context, index) {
           final Character character = characters[index];
           return GestureDetector(
-            onTap: () => {},
+            onTap: () =>
+                Navigator.pushNamed(context, "detail", arguments: character),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(

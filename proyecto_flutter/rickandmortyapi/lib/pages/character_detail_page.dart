@@ -15,7 +15,14 @@ class CharacterDetailPage extends StatelessWidget {
         slivers: [
           _CustomAppBar(character: character),
           SliverList(
-              delegate: SliverChildListDelegate([_PosterAndTitle(character)]))
+              delegate: SliverChildListDelegate([
+            _PosterAndTitle(character),
+            _Overview(),
+            _Overview(),
+            _Overview(),
+            _Overview(),
+            _Overview(),
+          ]))
         ],
       ),
     );
@@ -72,7 +79,7 @@ class _PosterAndTitle extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: FadeInImage(
-            placeholder: AssetImage("assets/no-image.jpg"),
+            placeholder: const AssetImage("assets/no-image.jpg"),
             image: NetworkImage(character.image),
             height: 150,
             width: 110,
@@ -81,25 +88,43 @@ class _PosterAndTitle extends StatelessWidget {
         ),
         const SizedBox(width: 20),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: size.width - 170),
+                child: Text(character.name,
+                    style: textTheme.headline5,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2)),
             Text(
-              character.name,
-              style: textTheme.headline5,
+              character.gender,
+              style: textTheme.subtitle1,
               overflow: TextOverflow.ellipsis,
             ),
             Row(
               children: [
-                const Icon(
-                  Icons.photo_album_outlined,
-                  color: Colors.green,
-                  size: 25,
-                ),
+                const Icon(Icons.photo_album_outlined,
+                    size: 15, color: Colors.green),
+                const SizedBox(width: 5),
                 Text(character.location.name, style: textTheme.caption)
               ],
             )
           ],
         )
       ]),
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      child: const Text(
+        "Cupidatat velit cupidatat dolor minim. Labore officia laboris commodo minim irure sit dolor est nulla magna aute pariatur velit. Labore voluptate proident pariatur tempor eiusmod anim in ipsum laborum veniam minim sit.",
+        textAlign: TextAlign.justify,
+      ),
     );
   }
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:form_app/ui/ui.dart';
-import 'package:form_app/widgets/card_container.dart';
 import 'package:form_app/widgets/widgets.dart';
 
 class LoginPageContext extends StatelessWidget {
@@ -19,7 +17,7 @@ class LoginPageContext extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text('Login', style: Theme.of(context).textTheme.headline4),
                 const SizedBox(height: 30),
-                _LoginForm(),
+                const _LoginForm(),
               ]),
             ),
             const SizedBox(height: 50),
@@ -43,44 +41,45 @@ class _LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Form(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(children: [
-          TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: StyleDecorationsInput.loginInputDecoration(
-                hintText: 'email@mail.com',
-                prefixIcon: Icons.alternate_email_rounded,
-                labelText: 'Correo electrónico',
-              ),
-              validator: (value) {
-                String pattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                RegExp regExp = RegExp(pattern);
-                return regExp.hasMatch(value ?? '')
-                    ? null
-                    : 'No coincide con formato de correo electrónico';
-              }),
-          TextFormField(
-            obscureText: true,
+    return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(children: [
+        TextFormField(
+            keyboardType: TextInputType.emailAddress,
             decoration: StyleDecorationsInput.loginInputDecoration(
-              hintText: '********',
-              labelText: 'Contraseña',
-              prefixIcon: Icons.lock_open_outlined,
+              hintText: 'email@mail.com',
+              prefixIcon: Icons.alternate_email_rounded,
+              labelText: 'Correo electrónico',
             ),
             validator: (value) {
-              return (value != null && value.length >= 6)
+              String pattern =
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+              RegExp regExp = RegExp(pattern);
+              return regExp.hasMatch(value ?? '')
                   ? null
-                  : 'Contraseña debe ser mínima de 6 caracteres';
-            },
+                  : 'No coincide con formato de correo electrónico';
+            }),
+        TextFormField(
+          obscureText: true,
+          decoration: StyleDecorationsInput.loginInputDecoration(
+            hintText: '********',
+            labelText: 'Contraseña',
+            prefixIcon: Icons.lock_open_outlined,
           ),
-          const SizedBox(height: 30),
-          MaterialButton(
+          validator: (value) {
+            value = value?.replaceAll(' ', '');
+            return (value != null && value.length >= 6)
+                ? null
+                : 'Contraseña debe ser mínima de 6 caracteres';
+          },
+        ),
+        const SizedBox(height: 30),
+        Builder(
+          builder: (context) => MaterialButton(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             color: Colors.green,
-            onPressed: () {},
+            onPressed: () => _submit(context),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               child: const Text(
@@ -88,9 +87,17 @@ class _LoginForm extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-          )
-        ]),
-      ),
+          ),
+        ),
+      ]),
     );
+  }
+
+  void _submit(BuildContext context) {
+    // final formState = context.findAncestorStateOfType<FormState>();
+    final formState = Form.of(context);
+    if (formState!.validate()) {
+      print('valid data');
+    }
   }
 }

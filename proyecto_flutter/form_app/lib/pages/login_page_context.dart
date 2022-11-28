@@ -51,8 +51,8 @@ class _LoginForm extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
               decoration: StyleDecorationsInput.loginInputDecoration(
                 hintText: 'email@mail.com',
-                labelText: 'Correo electrónico',
                 prefixIcon: Icons.alternate_email_rounded,
+                labelText: 'Correo electrónico',
               ),
               validator: (value) {
                 String pattern =
@@ -62,7 +62,33 @@ class _LoginForm extends StatelessWidget {
                     ? null
                     : 'No coincide con formato de correo electrónico';
               }),
-          TextFormField()
+          TextFormField(
+            obscureText: true,
+            decoration: StyleDecorationsInput.loginInputDecoration(
+              hintText: '********',
+              labelText: 'Contraseña',
+              prefixIcon: Icons.lock_open_outlined,
+            ),
+            validator: (value) {
+              return (value != null && value.length >= 6)
+                  ? null
+                  : 'Contraseña debe ser mínima de 6 caracteres';
+            },
+          ),
+          const SizedBox(height: 30),
+          MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            color: Colors.green,
+            onPressed: () {},
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+              child: const Text(
+                'Ingresar',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
         ]),
       ),
     );

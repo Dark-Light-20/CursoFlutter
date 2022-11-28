@@ -7,8 +7,14 @@ class CardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: double.infinity, decoration: _createCardShape(), child: child);
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: _createCardShape(),
+          child: child,
+        ));
   }
 
   BoxDecoration _createCardShape() => BoxDecoration(

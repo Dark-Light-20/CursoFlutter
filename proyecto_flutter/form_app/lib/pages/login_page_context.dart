@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:form_app/ui/ui.dart';
 import 'package:form_app/widgets/card_container.dart';
 import 'package:form_app/widgets/widgets.dart';
 
@@ -20,7 +21,16 @@ class LoginPageContext extends StatelessWidget {
                 const SizedBox(height: 30),
                 _LoginForm(),
               ]),
-            )
+            ),
+            const SizedBox(height: 50),
+            const Text(
+              'Crear una nueva cuenta',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 50),
           ]),
         ),
       ),
@@ -39,6 +49,11 @@ class _LoginForm extends StatelessWidget {
         child: Column(children: [
           TextFormField(
               keyboardType: TextInputType.emailAddress,
+              decoration: StyleDecorationsInput.loginInputDecoration(
+                hintText: 'email@mail.com',
+                labelText: 'Correo electrónico',
+                prefixIcon: Icons.alternate_email_rounded,
+              ),
               validator: (value) {
                 String pattern =
                     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';

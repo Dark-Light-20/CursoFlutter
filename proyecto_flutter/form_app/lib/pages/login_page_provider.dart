@@ -91,6 +91,7 @@ class _LoginForm extends StatelessWidget {
           onPressed: () {
             if (!loginForm.isValidForm()) return;
             print('valid form');
+            Navigator.pushReplacementNamed(context, 'home');
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),

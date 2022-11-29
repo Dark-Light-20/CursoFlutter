@@ -20,6 +20,12 @@ class _AnimatedTextState extends State<AnimatedText> {
             scale: animation,
             child: child,
           ),
+          /* child: _counter % 2 == 0
+              ? const CircularProgressIndicator()
+              : Text(
+                  _counter.toString(),
+                  style: const TextStyle(fontSize: 50),
+                ), */
           child: Text(
             // key: ValueKey<String>(_counter.toString()),
             key: Key(_counter.toString()),

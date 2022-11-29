@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keys_app/widgets/widgets.dart';
 
 class ListKeyPage extends StatefulWidget {
   const ListKeyPage({super.key});
@@ -41,6 +42,20 @@ class _ListKeyPageState extends State<ListKeyPage> {
           const TextField(
             key: Key('passwordKey'),
             decoration: InputDecoration(label: Text('Password')),
+          ),
+          /* 
+            Same problem happens with text buttons, the content of the first, 
+            when its destroyed, passes to the second. 
+            They need keys to specify its uniqueness (keep state).
+          */
+          const SizedBox(height: 10),
+          if (_enabledEmail)
+            const CounterButton(
+              key: Key('btn1'),
+            ),
+          const SizedBox(height: 10),
+          const CounterButton(
+            key: Key('btn2'),
           ),
         ],
       ),

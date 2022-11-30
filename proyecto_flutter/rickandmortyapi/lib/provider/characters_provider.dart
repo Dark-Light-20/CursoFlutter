@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rickandmortyapi/models/character.model.dart';
 import 'package:rickandmortyapi/models/characters_response.model.dart';
+import 'package:rickandmortyapi/models/characters_search_response.model.dart';
 
 class CharactersProvider extends ChangeNotifier {
   final String _baseUrl = "rickandmortyapi.com";
@@ -36,5 +37,12 @@ class CharactersProvider extends ChangeNotifier {
     final responseNextCharacters = CharactersResponse.fromJson(jsonData);
     nextCharacters = [...nextCharacters, ...responseNextCharacters.characters];
     notifyListeners();
+  }
+
+  Future<List<Character>> searchCharacter(String query) async {
+    final url = Uri.https(_baseUrl, '/api/character', {'name': query});
+    final response = await http.get(url);
+    final searchResponse = CharactersSearchResponse.fromJson(response.body);
+    return searchResponse.characters;
   }
 }

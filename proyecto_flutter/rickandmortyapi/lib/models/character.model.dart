@@ -29,6 +29,9 @@ class Character {
   String url;
   DateTime created;
 
+  // *** ID for animations with widget Hero(), for the tag
+  String? characterId;
+
   factory Character.fromJson(String str) => Character.fromMap(json.decode(str));
 
   factory Character.fromMap(Map<String, dynamic> json) => Character(

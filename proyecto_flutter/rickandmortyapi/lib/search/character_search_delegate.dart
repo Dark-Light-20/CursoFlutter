@@ -45,6 +45,25 @@ class CharacterSearchDelegate extends SearchDelegate {
         // When there's no data
         if (!snapshot.hasData) return _emptyContainer();
         final characters = snapshot.data!;
+        if (characters.isEmpty) {
+          return const Center(
+            child: Text(
+              'No existe este personaje',
+              style: TextStyle(fontSize: 20),
+            ),
+          );
+          /* return Center(
+            child: Column(
+              children: [
+                Text(
+                  'No existe este personaje',
+                  style: TextStyle(fontSize: 20),
+                ),
+                Image(image: AssetImage('assets/no-image.jpg'))
+              ],
+            ),
+          ); */
+        }
         return ListView.builder(
           itemCount: characters.length,
           itemBuilder: (context, index) => _CharacterItem(
@@ -59,19 +78,20 @@ class CharacterSearchDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     if (query.isEmpty) return _emptyContainer();
     return Center(
-        child: Column(
-      children: [
-        const SizedBox(height: 100),
-        const Image(image: AssetImage('assets/giphy.gif')),
-        Text(
-          'Buscando personaje: $query',
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w900,
+      child: Column(
+        children: [
+          const SizedBox(height: 100),
+          const Image(image: AssetImage('assets/giphy.gif')),
+          Text(
+            'Buscando personaje: $query',
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+            ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 }
 

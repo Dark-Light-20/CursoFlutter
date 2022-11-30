@@ -42,6 +42,9 @@ class CharactersProvider extends ChangeNotifier {
   Future<List<Character>> searchCharacter(String query) async {
     final url = Uri.https(_baseUrl, '/api/character', {'name': query});
     final response = await http.get(url);
+
+    if (response.statusCode != 200) return [];
+
     final searchResponse = CharactersSearchResponse.fromJson(response.body);
     return searchResponse.characters;
   }

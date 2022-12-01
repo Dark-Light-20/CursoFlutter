@@ -51,8 +51,11 @@ class _CharacterSliderState extends State<CharacterSlider> {
             controller: scrollController,
             itemCount: widget.characters.length,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) =>
-                _CharacterPoster(character: widget.characters[index]),
+            itemBuilder: (context, index) => _CharacterPoster(
+              character: widget.characters[index],
+              characterId:
+                  '${widget.title}-${index}-${widget.characters[index].id}',
+            ),
           ))
         ],
       ),
@@ -61,13 +64,18 @@ class _CharacterSliderState extends State<CharacterSlider> {
 }
 
 class _CharacterPoster extends StatelessWidget {
-  const _CharacterPoster({super.key, required this.character});
+  const _CharacterPoster({
+    super.key,
+    required this.character,
+    required this.characterId,
+  });
 
   final Character character;
+  final String characterId;
 
   @override
   Widget build(BuildContext context) {
-    character.characterId = 'slider-${character.id}';
+    character.characterId = characterId;
     return Container(
       width: 130,
       height: 190,

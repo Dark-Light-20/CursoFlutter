@@ -11,11 +11,18 @@ class MovableWidget extends StatefulWidget {
 class _MovableWidgetState extends State<MovableWidget> {
   bool _inBody = true;
   final _buttonKey = GlobalKey<CounterButtonGlobalKeyState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: const Drawer(),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.widgets),
+          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+        ),
         title: !_inBody ? CounterButtonGlobalKey(key: _buttonKey) : null,
         backgroundColor: Colors.black87,
         actions: [
